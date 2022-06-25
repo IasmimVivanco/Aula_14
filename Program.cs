@@ -55,6 +55,62 @@
 
 
             }
+
+            else if (opcao == "F" || opcao == "f")
+            {
+                Empresa empresa = new Empresa();
+                empresa.Cadastrar();
+                Console.Write("Deseja remover algum funcionário? S/N");
+                string opcao2 = Console.ReadLine();
+                if (opcao2 == "S" || opcao2 == "s")
+                {
+                    empresa.Remover();
+                    Console.WriteLine("Lista de Funcionários Atualizada:");
+                    empresa.ApresentarTodos();
+                }
+                else if (opcao2 == "N" || opcao2 == "n")
+                {
+                    Console.WriteLine("Lista de Funcionários:");
+                    empresa.ApresentarTodos();
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida");
+                }
+                Console.Write("Gostaria de Atualizar alguma informação? S/N");
+                string opcao3 = Console.ReadLine();
+                if (opcao3 == "S" || opcao3 == "s")
+                {
+                    empresa.Atualizar();
+                    Console.WriteLine("Lista atualizada:");
+                    empresa.ApresentarTodos();
+                }
+                else
+                {
+                    Console.WriteLine("---------------------------------");
+                }
+                Console.Write("Gostaria de verificar o estágio de algum funcionário ? S/N: ");
+                string opcao4 = Console.ReadLine();
+                Console.WriteLine();
+                if (opcao4 == "S" || opcao4 == "s")
+                {
+                    var funcionario = empresa.SelecionarFuncionario();
+                    Console.WriteLine();
+                    empresa.EstagioDoFuncionario();
+                    Console.WriteLine("---------------------------------");
+                }
+                else
+                {
+                    empresa.ApresentarTodos();
+                }
+
+
+            }
+
+            else
+            {
+                Console.WriteLine("Opção inválida");
+            }
         }
     }
 }

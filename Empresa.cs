@@ -45,41 +45,26 @@ namespace Aula14_Atividade
         }
         public override void Atualizar()
         {
-            ApresentarTodos();
-            Console.WriteLine("Qual o ID do funcionario para atualizar os dados? ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Qual informação deseja atualizar?" + Environment.NewLine +
-             "1 - Nome" + Environment.NewLine +
-             "2 - Sobrenome" + Environment.NewLine +
-             "3 - Telefone" + Environment.NewLine +
-             "4 - CPF");
-            int opcao = int.Parse(Console.ReadLine());
-            switch (opcao)
+            Console.WriteLine("Os dados de qual Funcionario deseja atualizar? ");
+            foreach (KeyValuePair<int, Funcionario> local in NovosFuncionarios)
             {
-                case 1:
-                    Console.WriteLine("Digite o nome: ");
-                    funcionario.Nome = Console.ReadLine();
-                    NovosFuncionarios[id] = funcionario;
-                    break;
-                case 2:
-                    Console.WriteLine("Digite o sobrenome: ");
-                    funcionario.Sobrenome = Console.ReadLine();
-                    NovosFuncionarios[id] = funcionario;
-                    break;
-                case 3:
-                    Console.WriteLine("Digite o telefone: ");
-                    funcionario.Telefone = Console.ReadLine();
-                    NovosFuncionarios[id] = funcionario;
-                    break;
-                case 4:
-                    Console.WriteLine("Digite o CPF: ");
-                    funcionario.CPF = Console.ReadLine();
-                    NovosFuncionarios[id] = funcionario;
-                    break;
-                default:
-                    Console.WriteLine("Valor inválido.");
-                    break;
+                Console.WriteLine($"Digite {local.Key} para atualizar {local.Value.Nome}");
             }
+            int funcionarioAtualizado = int.Parse(Console.ReadLine());
+            NovosFuncionarios.Remove(funcionarioAtualizado);
+            Funcionario funcionario = new Funcionario();
+            funcionario.Id = funcionarioAtualizado;
+            Console.Write("Digite o nome: ");
+            funcionario.Nome = Console.ReadLine();
+            Console.Write("Digite o sobrenome: ");
+            funcionario.Sobrenome = Console.ReadLine();
+            Console.Write("Digite o telefone: ");
+            funcionario.Telefone = Console.ReadLine();
+            Console.Write("Digite o CPF: ");
+            funcionario.CPF = Console.ReadLine();
+            NovosFuncionarios.Add(funcionarioAtualizado, funcionario);
+
+            Console.WriteLine("---------------------------------");
         }
 
         public override void ApresentarTodos()
@@ -106,6 +91,18 @@ namespace Aula14_Atividade
                 Console.WriteLine("Inativo.");
                 return false;
             }
+
+
+        }
+        public Funcionario SelecionarFuncionario()
+        {
+            Console.WriteLine("Selecione um funcionario para continuar:");
+            foreach (KeyValuePair<int, Funcionario> local in NovosFuncionarios)
+            {
+                Console.WriteLine($"Digite {local.Key} para selecionar {local.Value.Nome}");
+            }
+            int selecionarFuncionario = int.Parse(Console.ReadLine());
+            return NovosFuncionarios[selecionarFuncionario];
         }
     }
 }
